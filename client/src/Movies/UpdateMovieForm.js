@@ -39,6 +39,15 @@ export default function UpdateMovieForm(props) {
 
   }
 
+  const deleteHandler = e => {
+    e.preventDefault();
+            axios.delete(`http://localhost:5000/api/movies/${id}`)
+            .then(()=> {
+                props.getMovieList();
+                props.history.push('/')
+            })
+  }
+
 
 
     return (
@@ -62,7 +71,7 @@ export default function UpdateMovieForm(props) {
                 
                 />
 
-<input
+             <input
                 type="text"
                 name="metascore"
                 onChange={handleChanges}
@@ -71,18 +80,19 @@ export default function UpdateMovieForm(props) {
                 
                 />
 
-{/* <input
-                type="text"
-                name=""
-                onChange={handleChanges}
-                value=
-                
-                /> */}
+            <input
+                            type="string"
+                            name=""
+                            onChange={handleChanges}
+                            placeholder='stars'
+                            value={movie.stars}
+                            
+                            />
 
                 <button type="submit">Edit</button>
-
+           
             </form>
-            
+            <button onClick={deleteHandler}>delete</button>
         </div>
     )
 }
